@@ -1,8 +1,17 @@
 // middleware/verifyToken.js
 import jwt from "jsonwebtoken";
+import { getTokenFromHeader } from "./tokenFromHeader.js";
+
+
 
 export const verifyToken = (req, res, next) => {
-    const token = req.cookies.token;
+   // const token = req.cookies.token;
+  /* const authHeader = req.headers['authorization'];
+   const token = authHeader;*/
+
+   //console.log("authHeader :", authHeader);
+   //console.log("token :", token);
+   const token=getTokenFromHeader(req);
 
     if (!token) {
         return res.status(401).json({ message: "Vous n'êtes pas authentifiés" });

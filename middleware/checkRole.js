@@ -2,10 +2,15 @@
 
 import jwt from "jsonwebtoken";
 import prisma from "../lib/prisma.js";
+import { getTokenFromHeader } from "./tokenFromHeader.js";
+
 
 export const checkRole = (role) => {
     return async (req, res, next) => {
-        const token = req.cookies.token;
+        //const token = req.headers.Authorization;
+        /*const authHeader = req.headers['authorization'];
+        const token = authHeader; */
+        const token=getTokenFromHeader(req);
 
         if (!token) {
             return res.status(401).json({ message: "Vous n'êtes pas authentifiés" });

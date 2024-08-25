@@ -57,13 +57,16 @@ export const login = async (req, res) => {
         );
 
         const { password: userPassword, ...userInfo } = user;
+        userInfo.token= token;
 
+        res.status(200).json(userInfo);
+/*
         res.cookie("token", token, {
             httpOnly: true,
-            secure: true, // for production mode
+           // secure: true, // for production mode
             maxAge: age, // expiry time
         }).status(200).json(userInfo);
-
+*/
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Failed to login!" });
